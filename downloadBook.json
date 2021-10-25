@@ -1,0 +1,32 @@
+[
+    [
+        "https://cfvod.kaltura.com/hls/p/2152421/sp/215242100/serveFlavor/entryId/1_5su7yp56/v/1/ev/5/flavorId/1_nxxh4j3u/name/a.mp4/seg-1-v1-a1.ts",
+        100,
+        "2LC102501"
+    ],
+    [
+        "https://cfvod.kaltura.com/hls/p/2152421/sp/215242100/serveFlavor/entryId/1_53uq57jg/v/1/ev/4/flavorId/1_fp3yf5gw/name/a.mp4/seg-1-v1-a1.ts",
+        100,
+        "2LC100402"
+    ],
+    [
+        "https://cfvod.kaltura.com/hls/p/2152421/sp/215242100/serveFlavor/entryId/1_5flklk97/v/1/ev/4/flavorId/1_njy3j7yg/name/a.mp4/seg-1-v1-a1.ts",
+        160,
+        "2LC102503"
+    ],
+
+    
+
+
+    [
+        "SourceLocation",
+        100,
+        "2LC"
+    ],
+    [
+        "Place Holder",
+        100,
+        "Place Holder"
+    ]
+
+]
