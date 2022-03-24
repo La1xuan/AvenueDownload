@@ -1,3 +1,5 @@
+import threading
+import time
 import json
 import os
 
@@ -23,38 +25,66 @@ takingSource = input("sourceLocation")
 takingRange = int(input("length"))
 getAName = input("name")
 """
+def Play(args):
+    i = args
+    print("Download " + str(i) + " Start")
+    if i < 10:
+        num = "00" + str(i)
+    elif i < 100:
+        num = "0" + str(i)
+    else:
+        num = str(i)
+        #改这个来改下载地址
+    presets = 'youtube-dl -o"D:\YoutubeVideos\AvenueDownload\A' + getAName + '\A' + num + '.%(ext)s" '
+    name = "seg-" + str(i) + "-v1-a1.ts"
+    setting = presets + takingSource +name
+    if (os.system(setting) != 0) :
+        if (os.system(setting) != 0) :
+                    global ReachingEdge
+                    ReachingEdge = True
+    return
 
 booking = open("C:\\Essential Components\\AvenueDownload\\downloadBook.json","r")
 jsonInstructions = booking.read(99999999)
 instructions = json.loads(jsonInstructions)
 booking.close()
-for i in range(len(instructions) - 1):
+i = 0
+ReachingEdge = False
+
+
+
+Threads = []
+
+for j in range(len(instructions) - 2):
     takingSource = instructions[i][0][0:instructions[i][0].find("a.mp4/")] + "a.mp4/"
     getAName = instructions[i][1]
+    ThreadLen = 32
+    try: 
+        ThreadLen = int(instructions[i][2])
+    except:
+        ThreadLen = 32
+
     if takingSource == "SourceLocatioa.mp4/":
         continue
 #改这个来改下载地址
     path = 'D:\YoutubeVideos\AvenueDownload\A' + getAName
     print(takingSource)
-    for i in range(1,1000):
-        if i < 10:
-            num = "00" + str(i)
-        elif i < 100:
-            num = "0" + str(i)
-        else:
-            num = str(i)
-        #改这个来改下载地址
-        presets = 'youtube-dl -o"D:\YoutubeVideos\AvenueDownload\A' + getAName + '\A' + num + '.%(ext)s" '
-        name = "seg-" + str(i) + "-v1-a1.ts"
-        setting = presets + takingSource +name
-        print(setting)
-        if (os.system(setting) != 0) :
-            if (os.system(setting) != 0) :
-                if (os.system(setting) != 0) :
-                    if (os.system(setting) != 0) :
-                        break
+    for k in range(1,1000):
+        if ReachingEdge:
+            break
+        #print(setting)
+        if len(Threads) > ThreadLen:
+            for item in Threads:
+                item.join()
+            Threads = []
+        Threads.append(threading.Thread(target=Play,args=[k]))
+        Threads[len(Threads) - 1].start()
+    for item in Threads:
+        item.join()
+    
 #如果是C盘，把D改成C
     os.system("D:&cd " + path + "&copy /b *.ts " + getAName + ".mp4")
     os.system("D:&cd " + path + "&erase *.ts")
     
 os.startfile('D:\YoutubeVideos\AvenueDownload')
+ 
